@@ -10,14 +10,15 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array('', ''),
-            array('badword', ''),
-            array('b adword', ''),
-            array('b a d w o r d', ''),
-            array('b_a d w o r d', ''),
-            array('b_a_d_w_o_r_d', ''),
-            array('b a_d_w_o_r_d', ''),
-            array('b a.d_w_o_r_d', ''),
-            array('This is a b a.d_w_o_r_d', 'This is a '),
+            array('badword', 'xxxxxxx'),
+            array('b adword', 'xxxxxxxx'),
+            array('b a d w o r d', 'xxxxxxxxxxxxx'),
+            array('b_a d w o r d', 'xxxxxxxxxxxxx'),
+            array('b_a_d_w_o_r_d', 'xxxxxxxxxxxxx'),
+            array('b a_d_w_o_r_d', 'xxxxxxxxxxxxx'),
+            array('b a.d_w_o_r_d', 'xxxxxxxxxxxxx'),
+            array('This is a b a.d_w_o_r_d', 'This is a xxxxxxxxxxxxx'),
+            array('This is a b a.d_w_o_r_d you see', 'This is a xxxxxxxxxxxxx you see'),
         );
     }
 

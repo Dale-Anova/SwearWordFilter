@@ -4,18 +4,38 @@ namespace Bergau\SwearWordFilter;
 
 class SwearWordFilter
 {
+    /**
+     * @type string
+     */
+    private $replaceChar = 'x';
+
+    /**
+     * @type array
+     */
+    private $charsInBetweenBadWords = array(' ', '.', '_');
+
+    /**
+     * @type array
+     */
     private $wordsToFilter = array();
 
     /**
      * SwearWordFilter constructor.
      *
-     * @param array $wordsToFilter
+     * @param array  $wordsToFilter Array of words to filter
+     * @param string $replaceChar   The Character that replaces the bad word
      */
-    public function __construct(array $wordsToFilter)
+    public function __construct(array $wordsToFilter, $replaceChar = 'x')
     {
         $this->wordsToFilter = $wordsToFilter;
+        $this->replaceChar = $replaceChar;
     }
 
+    /**
+     * @param string $unfiltered
+     *
+     * @return string
+     */
     public function filter($unfiltered)
     {
         foreach ($this->wordsToFilter as $wordToFilter) {
@@ -31,12 +51,11 @@ class SwearWordFilter
 
                     // We search from the begin until the string ends "This is <start>b.a.d.w.o.r.d<end>"
                     for ($d = $i; $d <= $lengthOfRestOfUnfilteredString; $d++) {
-                        $u = str_replace(array(' ', '.', '_'), '', $unfiltered);
+                        $u = str_replace($this->charsInBetweenBadWords, '', $unfiltered);
+
                         if (false !== strpos($u, $wordToFilter)) {
                             // ok we found one
                             $positionOfUnfilteredStringThatBeginsWithBadWord = $i;
-                            $lengthOfBadWordFound = strlen($wordToFilter);
-
                             // we need to find the exact length in the unfiltered that contains the bad word
                             // "This is a >>>ba d.wo r d<<<"
                             $stack = '';
@@ -44,7 +63,7 @@ class SwearWordFilter
                             for ($x = $positionOfUnfilteredStringThatBeginsWithBadWord; $x <= $rest; $x++) {
                                 $stack .= substr($unfiltered, $x, 1);
 
-                                $u = str_replace(array(' ', '.', '_'), '', $stack);
+                                $u = str_replace($this->charsInBetweenBadWords, '', $stack);
 
                                 if (false !== strpos($u, $wordToFilter)) {
                                     // we now know the position of the badword
@@ -54,7 +73,8 @@ class SwearWordFilter
                                     $stringBeforeBadWord = substr($unfiltered, 0, $startPos);
                                     $stringAfterBadWord = substr($unfiltered, $endPos + 1); // this can be false
 
-                                    $filtered = $stringBeforeBadWord . '' . $stringAfterBadWord;
+                                    $replaceBadWordWith = str_repeat($this->replaceChar, $endPos - $startPos + 1);
+                                    $filtered = $stringBeforeBadWord . $replaceBadWordWith . $stringAfterBadWord;
 
                                     return $filtered;
                                 }

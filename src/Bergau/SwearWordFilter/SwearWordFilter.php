@@ -38,6 +38,30 @@ class SwearWordFilter
      */
     public function filter($unfiltered)
     {
+        $f = $unfiltered;
+
+        while ($this->containsBadWord($f)) {
+            $f = $this->filterByWord($f);
+        }
+
+        return $f;
+    }
+
+    private function containsBadWord($input)
+    {
+        $u = str_replace($this->charsInBetweenBadWords, '', $input);
+
+        foreach ($this->wordsToFilter as $wordToFilter) {
+            if (false !== strpos($u, $wordToFilter)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function filterByWord($unfiltered)
+    {
         foreach ($this->wordsToFilter as $wordToFilter) {
             $firstCharacterFromWordToFilter = substr($wordToFilter, 0, 1);
 
@@ -50,7 +74,7 @@ class SwearWordFilter
                     $lengthOfRestOfUnfilteredString = strlen($unfiltered) - $i;
 
                     // We search from the begin until the string ends "This is <start>b.a.d.w.o.r.d<end>"
-                    for ($d = $i; $d <= $lengthOfRestOfUnfilteredString; $d++) {
+                    for ($d = $i; $d <= $lengthOfRestOfUnfilteredString + $i; $d++) {
                         $u = str_replace($this->charsInBetweenBadWords, '', $unfiltered);
 
                         if (false !== strpos($u, $wordToFilter)) {
@@ -85,6 +109,6 @@ class SwearWordFilter
             }
         }
 
-        return $unfiltered;
+        return '';
     }
 }

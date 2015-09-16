@@ -4,7 +4,6 @@
     <list default="true" id="aec3319f-39d3-4a4e-8c5b-293cd350134c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" afterPath="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php" afterPath="$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SwearWordFilter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +42,8 @@
       <file leaf-file-name="SwearWordFilterTest.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60313314">
-              <caret line="22" column="103" selection-start-line="22" selection-start-column="103" selection-end-line="22" selection-end-column="103" />
+            <state vertical-scroll-proportion="0.6305483">
+              <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -53,8 +52,8 @@
       <file leaf-file-name="SwearWordFilter.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.62963">
-              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state vertical-scroll-proportion="-74.25926">
+              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -306,6 +305,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979593" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979593" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -320,7 +320,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32979593" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -335,12 +334,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php</url>
-          <line>73</line>
+          <line>78</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php</url>
-          <line>77</line>
+          <line>82</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -388,16 +387,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.62963">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state vertical-scroll-proportion="-74.25926">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60313314">
-          <caret line="22" column="103" selection-start-line="22" selection-start-column="103" selection-end-line="22" selection-end-column="103" />
+        <state vertical-scroll-proportion="0.6305483">
+          <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
           <folding />
         </state>
       </provider>

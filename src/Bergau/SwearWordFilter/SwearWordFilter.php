@@ -41,12 +41,17 @@ class SwearWordFilter
         $f = $unfiltered;
 
         while ($this->containsBadWord($f)) {
-            $f = $this->filterByWord($f);
+            $f = $this->innerFilter($f);
         }
 
         return $f;
     }
 
+    /**
+     * @param string $input
+     *
+     * @return bool
+     */
     private function containsBadWord($input)
     {
         $u = str_replace($this->charsInBetweenBadWords, '', $input);
@@ -60,7 +65,7 @@ class SwearWordFilter
         return false;
     }
 
-    private function filterByWord($unfiltered)
+    private function innerFilter($unfiltered)
     {
         foreach ($this->wordsToFilter as $wordToFilter) {
             $firstCharacterFromWordToFilter = substr($wordToFilter, 0, 1);

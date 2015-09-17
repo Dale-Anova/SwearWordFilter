@@ -12,5 +12,6 @@ Todos
 ===
 
  - Multiple words still does not work
+ - "ba badword" does not work correctly
  - "badword and anotherbadword" is tricky yet because it now returns "anotherxxxxxxx", so maybe need some presorting or something
  - Do some refactoring jesus...

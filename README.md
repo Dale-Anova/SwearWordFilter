@@ -11,6 +11,4 @@ Look at the tests: https://github.com/cbergau/SwearWordFilter/blob/master/tests/
 Todos
 ===
 
- - Multiple words still does not work
  - "badword and anotherbadword" is tricky yet because it now returns "anotherxxxxxxx", so maybe need some presorting or something
- - Do some refactoring jesus...

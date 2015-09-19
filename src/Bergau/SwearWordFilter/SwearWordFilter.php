@@ -20,6 +20,11 @@ class SwearWordFilter
     private $wordsToFilter = array();
 
     /**
+     * @type array
+     */
+    private $wordsThatWereAlreadFiltered = array();
+
+    /**
      * SwearWordFilter constructor.
      *
      * @param array  $wordsToFilter Array of words to filter
@@ -38,6 +43,7 @@ class SwearWordFilter
      */
     public function filter($unfiltered)
     {
+        $this->wordsThatWereAlreadFiltered = array();
         $f = $unfiltered;
 
         while ($this->containsBadWord($f)) {
@@ -65,19 +71,44 @@ class SwearWordFilter
         return false;
     }
 
+    /**
+     * @param string $input
+     *
+     * @return bool
+     */
+    private function contains($input, $badWord)
+    {
+        $u = str_replace($this->charsInBetweenBadWords, '', $input);
+
+        if (false !== strpos($u, $badWord)) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function innerFilter($input)
     {
         foreach ($this->wordsToFilter as $wordToFilter) {
+
+            if ($this->wordWasAlreadyFiltered($wordToFilter)) {
+                continue;
+            }
+
             $realPositionAfterBugfix = $this->getPositionFromAndToOfBadword($input, $wordToFilter);
 
             $startPos = $realPositionAfterBugfix['from'];
-            $endPos   = $realPositionAfterBugfix['to'];
+            $endPos = $realPositionAfterBugfix['to'];
 
             $stringBeforeBadWord = substr($input, 0, $startPos);
-            $stringAfterBadWord  = substr($input, $endPos + 1);
+            $stringAfterBadWord = substr($input, $endPos + 1);
 
-            $replaceBadWordWith  = str_repeat($this->replaceChar, $endPos - $startPos + 1);
+            $replaceBadWordWith = str_repeat($this->replaceChar, $endPos - $startPos + 1);
             $filtered = $stringBeforeBadWord . $replaceBadWordWith . $stringAfterBadWord;
+
+            if (!$this->contains($filtered, $wordToFilter)) {
+                $this->setWordIsFiltered($wordToFilter);
+            }
 
             return $filtered;
         }
@@ -128,5 +159,23 @@ class SwearWordFilter
         }
 
         return array('from' => $fromPosition, 'to' => $endPosition);
+    }
+
+    /**
+     * @param $wordToFilter
+     *
+     * @return bool
+     */
+    private function wordWasAlreadyFiltered($wordToFilter)
+    {
+        return in_array($wordToFilter, $this->wordsThatWereAlreadFiltered);
+    }
+
+    /**
+     * @param $wordToFilter
+     */
+    private function setWordIsFiltered($wordToFilter)
+    {
+        $this->wordsThatWereAlreadFiltered[] = $wordToFilter;
     }
 }

@@ -22,7 +22,7 @@ class SwearWordFilter
     /**
      * @type array
      */
-    private $wordsThatWereAlreadFiltered = array();
+    private $wordsThatWereAlreadyFiltered = array();
 
     /**
      * SwearWordFilter constructor.
@@ -43,7 +43,7 @@ class SwearWordFilter
      */
     public function filter($unfiltered)
     {
-        $this->wordsThatWereAlreadFiltered = array();
+        $this->wordsThatWereAlreadyFiltered = array();
         $f = $unfiltered;
 
         while ($this->containsBadWord($f)) {
@@ -172,7 +172,7 @@ class SwearWordFilter
      */
     private function wordWasAlreadyFiltered($wordToFilter)
     {
-        return in_array($wordToFilter, $this->wordsThatWereAlreadFiltered);
+        return in_array($wordToFilter, $this->wordsThatWereAlreadyFiltered);
     }
 
     /**
@@ -180,6 +180,6 @@ class SwearWordFilter
      */
     private function setWordIsFiltered($wordToFilter)
     {
-        $this->wordsThatWereAlreadFiltered[] = $wordToFilter;
+        $this->wordsThatWereAlreadyFiltered[] = $wordToFilter;
     }
 }

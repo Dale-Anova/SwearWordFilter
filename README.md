@@ -1,7 +1,7 @@
 SwearWordFilter
 ===
 
-[![Build Status](https://travis-ci.org/cbergau/SwearWordFilter.svg)](https://travis-ci.org/cbergau/SwearWordFilter)
+[![Build Status](https://travis-ci.org/cbergau/SwearWordFilter.svg)](https://travis-ci.org/cbergau/SwearWordFilter) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cbergau/SwearWordFilter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cbergau/SwearWordFilter/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/cbergau/SwearWordFilter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/cbergau/SwearWordFilter/?branch=master)
 
 Cool Swear Word Filter, not like the cheap ones which u can trick with adding a "." in between characters :P
 

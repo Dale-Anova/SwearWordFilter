@@ -3,6 +3,11 @@ SwearWordFilter
 
 Cool Swear Word Filter, not like the cheap ones which u can trick with adding a "." in between characters :P
 
+Installation with Composer
+===
+
+    composer require cbergau/swearwordfilter
+
 Examples
 ===
 

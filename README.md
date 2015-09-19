@@ -8,7 +8,24 @@ Examples
 
 Look at the tests: https://github.com/cbergau/SwearWordFilter/blob/master/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php
 
+Example Code
+===
+
+    <?php
+    
+    use Bergau\SwearWordFilter;
+    
+    // This is the string you want to filter
+    $myInputIWantToFilter = '....';
+    
+    $replaceWith = 'x';
+    $allBadWords = array('badword');
+    
+    $filter = new SwearWordFilter($allBadWords, $replaceWith);
+    
+    $cleanInput = $filter->filter($myInputIWantToFilter);
+
 Todos
 ===
 
- - "badword and anotherbadword" is tricky yet because it now returns "anotherxxxxxxx", so maybe need some presorting or something
+ - "badword and anotherbadword" is tricky yet because it now returns "anotherxxxxxxx"

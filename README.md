@@ -1,6 +1,8 @@
 SwearWordFilter
 ===
 
+[![Build Status](https://travis-ci.org/cbergau/SwearWordFilter.svg)](https://travis-ci.org/cbergau/SwearWordFilter)
+
 Cool Swear Word Filter, not like the cheap ones which u can trick with adding a "." in between characters :P
 
 Installation with Composer

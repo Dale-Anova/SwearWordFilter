@@ -65,55 +65,70 @@ class SwearWordFilter
         return false;
     }
 
-    private function innerFilter($unfiltered)
+    private function innerFilter($input)
     {
         foreach ($this->wordsToFilter as $wordToFilter) {
-            $firstCharacterFromWordToFilter = substr($wordToFilter, 0, 1);
+            $realPositionAfterBugfix = $this->getPositionFromAndToOfBadword($input, $wordToFilter);
 
-            // We search from the beginning of the unfiltered string
-            for ($i = 0; $i < strlen($unfiltered); $i++) {
-                $nextCharacterFromUnfiltered = substr($unfiltered, $i, 1);
+            $startPos = $realPositionAfterBugfix['from'];
+            $endPos   = $realPositionAfterBugfix['to'];
 
-                // We potentially found a bad word, a string began with the same char as the bad words first char
-                if ($nextCharacterFromUnfiltered === $firstCharacterFromWordToFilter) {
-                    $lengthOfRestOfUnfilteredString = strlen($unfiltered) - $i;
+            $stringBeforeBadWord = substr($input, 0, $startPos);
+            $stringAfterBadWord  = substr($input, $endPos + 1);
 
-                    // We search from the begin until the string ends "This is <start>b.a.d.w.o.r.d<end>"
-                    for ($d = $i; $d <= $lengthOfRestOfUnfilteredString + $i; $d++) {
-                        $u = str_replace($this->charsInBetweenBadWords, '', $unfiltered);
+            $replaceBadWordWith  = str_repeat($this->replaceChar, $endPos - $startPos + 1);
+            $filtered = $stringBeforeBadWord . $replaceBadWordWith . $stringAfterBadWord;
 
-                        if (false !== strpos($u, $wordToFilter)) {
-                            // ok we found one
-                            $positionOfUnfilteredStringThatBeginsWithBadWord = $i;
-                            // we need to find the exact length in the unfiltered that contains the bad word
-                            // "This is a >>>ba d.wo r d<<<"
-                            $stack = '';
-                            $rest = $lengthOfRestOfUnfilteredString + $i;
-                            for ($x = $positionOfUnfilteredStringThatBeginsWithBadWord; $x <= $rest; $x++) {
-                                $stack .= substr($unfiltered, $x, 1);
-
-                                $u = str_replace($this->charsInBetweenBadWords, '', $stack);
-
-                                if (false !== strpos($u, $wordToFilter)) {
-                                    // we now know the position of the badword
-                                    $startPos = $i;
-                                    $endPos = $x;
-
-                                    $stringBeforeBadWord = substr($unfiltered, 0, $startPos);
-                                    $stringAfterBadWord = substr($unfiltered, $endPos + 1); // this can be false
-
-                                    $replaceBadWordWith = str_repeat($this->replaceChar, $endPos - $startPos + 1);
-                                    $filtered = $stringBeforeBadWord . $replaceBadWordWith . $stringAfterBadWord;
-
-                                    return $filtered;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            return $filtered;
         }
 
         return '';
+    }
+
+    private function getPositionFromAndToOfBadword($input, $wordToFilter)
+    {
+        $stack = '';
+        $foundFromPos = false;
+        $posOfBadWord = 0;
+        $fromPosition = 0;
+        $endPosition = 0;
+
+        for ($posOfInput = 0; $posOfInput < strlen($input); $posOfInput++) {
+            $aCharFromUnfiltered = substr($input, $posOfInput, 1);
+            $aCharFromWordToFilter = substr($wordToFilter, $posOfBadWord, 1);
+
+            // "Ba dword"
+            if (in_array($aCharFromUnfiltered, $this->charsInBetweenBadWords)) {
+                continue;
+            } else {
+                if ($aCharFromUnfiltered != $aCharFromWordToFilter) {
+                    $posOfBadWord = 0;
+                    $stack = '';
+                    $foundFromPos = false;
+                    $aCharFromWordToFilter = substr($wordToFilter, $posOfBadWord, 1);
+                }
+            }
+
+            if ($aCharFromUnfiltered === $aCharFromWordToFilter) {
+                if (!$foundFromPos) {
+                    $fromPosition = $posOfInput;
+                    $foundFromPos = true;
+                }
+                $stack .= $aCharFromUnfiltered;
+                $posOfBadWord++;
+            } else {
+                // Ok it was something like "ba.badword" where we just analyzed "ba." and that does not match, rerun.
+                $fromPosition = 0;
+                $posOfBadWord = 0;
+                $stack = '';
+            }
+
+            if ($stack === $wordToFilter) {
+                $endPosition = $posOfInput;
+                break;
+            }
+        }
+
+        return array('from' => $fromPosition, 'to' => $endPosition);
     }
 }

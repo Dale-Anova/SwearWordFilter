@@ -95,6 +95,10 @@ class SwearWordFilter
                 continue;
             }
 
+            if (!$this->contains($input, $wordToFilter)) {
+                continue;
+            }
+
             $realPositionAfterBugfix = $this->getPositionFromAndToOfBadword($input, $wordToFilter);
 
             $startPos = $realPositionAfterBugfix['from'];

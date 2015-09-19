@@ -47,6 +47,10 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     public function multipleWordProvider()
     {
         return array(
+            array('', ''),
+            array('badword', 'xxxxxxx'),
+            array('badwordanotherone', 'xxxxxxxxxxxxxxxxx'),
+            array('anotherone', 'xxxxxxxxxx'),
             array('A badword and anotherone', 'A xxxxxxx and xxxxxxxxxx'),
             array('A badword and anotherone and anotherone', 'A xxxxxxx and xxxxxxxxxx and xxxxxxxxxx'),
         );

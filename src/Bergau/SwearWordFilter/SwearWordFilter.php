@@ -97,7 +97,6 @@ class SwearWordFilter
             $aCharFromUnfiltered = substr($input, $posOfInput, 1);
             $aCharFromWordToFilter = substr($wordToFilter, $posOfBadWord, 1);
 
-            // "Ba dword"
             if (in_array($aCharFromUnfiltered, $this->charsInBetweenBadWords)) {
                 continue;
             } else {
@@ -117,7 +116,6 @@ class SwearWordFilter
                 $stack .= $aCharFromUnfiltered;
                 $posOfBadWord++;
             } else {
-                // Ok it was something like "ba.badword" where we just analyzed "ba." and that does not match, rerun.
                 $fromPosition = 0;
                 $posOfBadWord = 0;
                 $stack = '';

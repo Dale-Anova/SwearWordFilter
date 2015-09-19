@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aec3319f-39d3-4a4e-8c5b-293cd350134c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" afterPath="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php" afterPath="$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SwearWordFilter.iws" />
@@ -31,21 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SwearWordFilterTest.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SwearWordFilterTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2464146">
-              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+            <state vertical-scroll-proportion="-10.518518">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwearWordFilter.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SwearWordFilter.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.4444447">
-              <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.3754889">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,8 +75,8 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" />
         <option value="$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php" />
+        <option value="$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php" />
       </list>
     </option>
   </component>
@@ -322,7 +320,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442519534013</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Refactoring. Solved the &quot;ba badword&quot; issue.">
+      <created>1442677970136</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1442677970136</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -364,7 +368,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme" />
+    <MESSAGE value="Refactoring. Solved the &quot;ba badword&quot; issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring. Solved the &quot;ba badword&quot; issue." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -376,17 +381,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php</url>
-          <line>96</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php</url>
-          <line>125</line>
+          <line>123</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php</url>
-          <line>131</line>
+          <line>129</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
@@ -536,18 +536,18 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php">
+    <entry file="file://$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4444447">
-          <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+        <state vertical-scroll-proportion="-10.518518">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Bergau/SwearWordFilter/SwearWordFilterTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Bergau/SwearWordFilter/SwearWordFilter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2464146">
-          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.3754889">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding />
         </state>
       </provider>

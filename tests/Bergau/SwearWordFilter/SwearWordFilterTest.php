@@ -77,5 +77,6 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     public function testFilterWithMultipleCrossingWords()
     {
         $this->assertFilter(array('bad', 'anotherbadword'), 'bad and anotherbadword', 'xxx and xxxxxxxxxxxxxx');
+        $this->assertFilter(array('bad', 'anotherbadword'), 'bad bad and anotherbadword', 'xxx xxx and xxxxxxxxxxxxxx');
     }
 }

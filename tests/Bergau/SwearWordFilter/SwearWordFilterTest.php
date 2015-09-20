@@ -17,7 +17,10 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
         $this->assertSame($filtered, $filter->filter($input));
     }
 
-    public function provider()
+    /**
+     * @return array
+     */
+    public function simpleProvider()
     {
         return array(
             array('', ''),
@@ -41,7 +44,7 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provider
+     * @dataProvider simpleProvider
      *
      * @param string $input
      * @param string $filtered
@@ -51,6 +54,9 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
         $this->assertFilter(array('badword'), $input, $filtered);
     }
 
+    /**
+     * @return array
+     */
     public function multipleWordProvider()
     {
         return array(
@@ -74,9 +80,25 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
         $this->assertFilter(array('badword', 'anotherone'), $input, $filtered);
     }
 
-    public function testFilterWithMultipleCrossingWords()
+    /**
+     * @return array
+     */
+    public function multipleCrossingWordsProvider()
     {
-        $this->assertFilter(array('bad', 'anotherbadword'), 'bad and anotherbadword', 'xxx and xxxxxxxxxxxxxx');
-        $this->assertFilter(array('bad', 'anotherbadword'), 'bad bad and anotherbadword', 'xxx xxx and xxxxxxxxxxxxxx');
+        return array(
+            array('bad and anotherbadword', 'xxx and xxxxxxxxxxxxxx'),
+            array('bad bad and anotherbadword', 'xxx xxx and xxxxxxxxxxxxxx',)
+        );
+    }
+
+    /**
+     * @dataProvider multipleCrossingWordsProvider
+     *
+     * @param string $input
+     * @param string $filtered
+     */
+    public function testFilterWithMultipleCrossingWords($input, $filtered)
+    {
+        $this->assertFilter(array('bad', 'anotherbadword'), $input, $filtered);
     }
 }

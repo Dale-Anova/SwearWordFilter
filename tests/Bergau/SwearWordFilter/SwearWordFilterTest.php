@@ -6,6 +6,17 @@ use PHPUnit_Framework_TestCase;
 
 class SwearWordFilterTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @param $wordsToFilter
+     * @param $input
+     * @param $filtered
+     */
+    private function assertFilter($wordsToFilter, $input, $filtered)
+    {
+        $filter = new SwearWordFilter($wordsToFilter);
+        $this->assertSame($filtered, $filter->filter($input));
+    }
+
     public function provider()
     {
         return array(
@@ -37,11 +48,7 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
      */
     public function testFilter($input, $filtered)
     {
-        $wordsToFilter = array('badword');
-
-        $filter = new SwearWordFilter($wordsToFilter);
-
-        $this->assertSame($filtered, $filter->filter($input));
+        $this->assertFilter(array('badword'), $input, $filtered);
     }
 
     public function multipleWordProvider()
@@ -59,15 +66,16 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider multipleWordProvider
      *
-     * @param $input
-     * @param $filtered
+     * @param string $input
+     * @param string $filtered
      */
     public function testFilterWithMultipleWords($input, $filtered)
     {
-        $wordsToFilter = array('badword', 'anotherone');
+        $this->assertFilter(array('badword', 'anotherone'), $input, $filtered);
+    }
 
-        $filter = new SwearWordFilter($wordsToFilter);
-
-        $this->assertSame($filtered, $filter->filter($input));
+    public function testFilterWithMultipleCrossingWords()
+    {
+        $this->assertFilter(array('bad', 'anotherbadword'), 'bad and anotherbadword', 'xxx and xxxxxxxxxxxxxx');
     }
 }

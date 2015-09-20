@@ -31,8 +31,3 @@ Example Code
     $filter = new SwearWordFilter($allBadWords, $replaceWith);
     
     $cleanInput = $filter->filter($myInputIWantToFilter);
-
-Todos
-===
-
- - "badword and anotherbadword" is tricky yet because it now returns "anotherxxxxxxx"

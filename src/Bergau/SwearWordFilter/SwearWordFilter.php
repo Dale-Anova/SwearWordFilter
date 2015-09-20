@@ -52,6 +52,10 @@ class SwearWordFilter
      */
     public function filter($input)
     {
+        usort($this->wordsToFilter, function ($a, $b) {
+            return strlen($b) - strlen($a);
+        });
+        
         $this->wordsThatWereAlreadyFiltered = array();
         $filtered = $input;
 

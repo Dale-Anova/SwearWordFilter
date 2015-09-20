@@ -2,6 +2,13 @@
 
 namespace Bergau\SwearWordFilter;
 
+/**
+ * SwearWordFilter
+ *
+ * @author      Christian Bergau <cbergau86@gmail.com>
+ * @copyright   2015, Christian Bergau
+ * @license     MIT
+ */
 class SwearWordFilter
 {
     /**
@@ -12,7 +19,7 @@ class SwearWordFilter
     /**
      * @type array
      */
-    private $charsInBetweenBadWords = array(' ', '.', '_');
+    private $charsInBetweenSwearWords = array(' ', '.', '_');
 
     /**
      * @type array
@@ -28,7 +35,7 @@ class SwearWordFilter
      * SwearWordFilter constructor.
      *
      * @param array  $wordsToFilter Array of words to filter
-     * @param string $replaceChar   The Character that replaces the bad word
+     * @param string $replaceChar   The Character that replaces the swear word
      */
     public function __construct(array $wordsToFilter, $replaceChar = 'x')
     {
@@ -37,20 +44,22 @@ class SwearWordFilter
     }
 
     /**
-     * @param string $unfiltered
+     * @api
+     *
+     * @param string $input
      *
      * @return string
      */
-    public function filter($unfiltered)
+    public function filter($input)
     {
         $this->wordsThatWereAlreadyFiltered = array();
-        $f = $unfiltered;
+        $filtered = $input;
 
-        while ($this->containsBadWord($f)) {
-            $f = $this->innerFilter($f);
+        while ($this->containsSwearWord($filtered)) {
+            $filtered = $this->doFilter($filtered);
         }
 
-        return $f;
+        return $filtered;
     }
 
     /**
@@ -58,12 +67,12 @@ class SwearWordFilter
      *
      * @return bool
      */
-    private function containsBadWord($input)
+    private function containsSwearWord($input)
     {
-        $u = str_replace($this->charsInBetweenBadWords, '', $input);
+        $inputSpecialCharsStrippedOut = str_replace($this->charsInBetweenSwearWords, '', $input);
 
         foreach ($this->wordsToFilter as $wordToFilter) {
-            if (false !== strpos($u, $wordToFilter)) {
+            if (false !== strpos($inputSpecialCharsStrippedOut, $wordToFilter)) {
                 return true;
             }
         }
@@ -73,21 +82,27 @@ class SwearWordFilter
 
     /**
      * @param string $input
+     * @param string $swearWord
      *
      * @return bool
      */
-    private function contains($input, $badWord)
+    private function contains($input, $swearWord)
     {
-        $u = str_replace($this->charsInBetweenBadWords, '', $input);
+        $inputSpecialCharsStrippedOut = str_replace($this->charsInBetweenSwearWords, '', $input);
 
-        if (false !== strpos($u, $badWord)) {
+        if (false !== strpos($inputSpecialCharsStrippedOut, $swearWord)) {
             return true;
         }
 
         return false;
     }
 
-    private function innerFilter($input)
+    /**
+     * @param string $input
+     *
+     * @return string
+     */
+    private function doFilter($input)
     {
         foreach ($this->wordsToFilter as $wordToFilter) {
 
@@ -99,16 +114,16 @@ class SwearWordFilter
                 continue;
             }
 
-            $realPositionAfterBugfix = $this->getPositionFromAndToOfBadword($input, $wordToFilter);
+            $positionOfSwearWord = $this->getPositionFromAndToOfSwearWord($input, $wordToFilter);
 
-            $startPos = $realPositionAfterBugfix['from'];
-            $endPos = $realPositionAfterBugfix['to'];
+            $startPos = $positionOfSwearWord['from'];
+            $endPos = $positionOfSwearWord['to'];
 
-            $stringBeforeBadWord = substr($input, 0, $startPos);
-            $stringAfterBadWord = substr($input, $endPos + 1);
+            $stringBeforeSwearWord = substr($input, 0, $startPos);
+            $stringAfterSwearWord = substr($input, $endPos + 1);
 
-            $replaceBadWordWith = str_repeat($this->replaceChar, $endPos - $startPos + 1);
-            $filtered = $stringBeforeBadWord . $replaceBadWordWith . $stringAfterBadWord;
+            $swearWordReplaced = str_repeat($this->replaceChar, $endPos - $startPos + 1);
+            $filtered = $stringBeforeSwearWord . $swearWordReplaced . $stringAfterSwearWord;
 
             if (!$this->contains($filtered, $wordToFilter)) {
                 $this->setWordIsFiltered($wordToFilter);
@@ -120,44 +135,50 @@ class SwearWordFilter
         return '';
     }
 
-    private function getPositionFromAndToOfBadword($input, $wordToFilter)
+    /**
+     * @param string $input
+     * @param string $wordToFilter
+     *
+     * @return array
+     */
+    private function getPositionFromAndToOfSwearWord($input, $wordToFilter)
     {
         $stack = '';
         $foundFromPos = false;
-        $posOfBadWord = 0;
+        $posOfSwearWord = 0;
         $fromPosition = 0;
         $endPosition = 0;
 
-        for ($posOfInput = 0; $posOfInput < strlen($input); $posOfInput++) {
-            $aCharFromUnfiltered = substr($input, $posOfInput, 1);
-            $aCharFromWordToFilter = substr($wordToFilter, $posOfBadWord, 1);
+        for ($positionOfInput = 0; $positionOfInput < strlen($input); $positionOfInput++) {
+            $aCharFromUnfiltered = substr($input, $positionOfInput, 1);
+            $aCharFromWordToFilter = substr($wordToFilter, $posOfSwearWord, 1);
 
-            if (in_array($aCharFromUnfiltered, $this->charsInBetweenBadWords)) {
+            if (in_array($aCharFromUnfiltered, $this->charsInBetweenSwearWords)) {
                 continue;
             } else {
                 if ($aCharFromUnfiltered != $aCharFromWordToFilter) {
-                    $posOfBadWord = 0;
+                    $posOfSwearWord = 0;
                     $stack = '';
                     $foundFromPos = false;
-                    $aCharFromWordToFilter = substr($wordToFilter, $posOfBadWord, 1);
+                    $aCharFromWordToFilter = substr($wordToFilter, $posOfSwearWord, 1);
                 }
             }
 
             if ($aCharFromUnfiltered === $aCharFromWordToFilter) {
                 if (!$foundFromPos) {
-                    $fromPosition = $posOfInput;
+                    $fromPosition = $positionOfInput;
                     $foundFromPos = true;
                 }
                 $stack .= $aCharFromUnfiltered;
-                $posOfBadWord++;
+                $posOfSwearWord++;
             } else {
                 $fromPosition = 0;
-                $posOfBadWord = 0;
+                $posOfSwearWord = 0;
                 $stack = '';
             }
 
             if ($stack === $wordToFilter) {
-                $endPosition = $posOfInput;
+                $endPosition = $positionOfInput;
                 break;
             }
         }
@@ -166,7 +187,7 @@ class SwearWordFilter
     }
 
     /**
-     * @param $wordToFilter
+     * @param string $wordToFilter
      *
      * @return bool
      */
@@ -176,7 +197,7 @@ class SwearWordFilter
     }
 
     /**
-     * @param $wordToFilter
+     * @param string $wordToFilter
      */
     private function setWordIsFiltered($wordToFilter)
     {

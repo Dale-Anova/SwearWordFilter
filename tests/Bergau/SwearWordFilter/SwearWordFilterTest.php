@@ -32,16 +32,16 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      *
-     * @param string $unfiltered
-     * @param string $expectedValueFromFilter
+     * @param string $input
+     * @param string $filtered
      */
-    public function testFilter($unfiltered, $expectedValueFromFilter)
+    public function testFilter($input, $filtered)
     {
         $wordsToFilter = array('badword');
 
         $filter = new SwearWordFilter($wordsToFilter);
 
-        $this->assertSame($expectedValueFromFilter, $filter->filter($unfiltered));
+        $this->assertSame($filtered, $filter->filter($input));
     }
 
     public function multipleWordProvider()
@@ -59,15 +59,15 @@ class SwearWordFilterTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider multipleWordProvider
      *
-     * @param $unfiltered
-     * @param $expectedValueFromFilter
+     * @param $input
+     * @param $filtered
      */
-    public function testFilterWithMultipleWords($unfiltered, $expectedValueFromFilter)
+    public function testFilterWithMultipleWords($input, $filtered)
     {
         $wordsToFilter = array('badword', 'anotherone');
 
         $filter = new SwearWordFilter($wordsToFilter);
 
-        $this->assertSame($expectedValueFromFilter, $filter->filter($unfiltered));
+        $this->assertSame($filtered, $filter->filter($input));
     }
 }

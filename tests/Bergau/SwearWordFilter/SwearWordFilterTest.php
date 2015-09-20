@@ -7,11 +7,11 @@ use PHPUnit_Framework_TestCase;
 class SwearWordFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @param $wordsToFilter
-     * @param $input
-     * @param $filtered
+     * @param array  $wordsToFilter
+     * @param string $input
+     * @param string $filtered
      */
-    private function assertFilter($wordsToFilter, $input, $filtered)
+    private function assertFilter(array $wordsToFilter, $input, $filtered)
     {
         $filter = new SwearWordFilter($wordsToFilter);
         $this->assertSame($filtered, $filter->filter($input));

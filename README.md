@@ -30,4 +30,4 @@ Example Code
     
     $filter = new SwearWordFilter($allBadWords, $replaceWith);
     
-    $cleanInput = $filter->filter($myInputIWantToFilter);
+    $cleaned = $filter->filter($myInputIWantToFilter);
